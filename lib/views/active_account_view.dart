@@ -1,22 +1,19 @@
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:thimar/views/active_account_view.dart';
+import 'package:thimar/views/forget_password_view.dart';
 import 'package:thimar/widgets/my_bincode.dart';
 import 'package:thimar/widgets/my_button.dart';
 import 'package:thimar/widgets/my_circular_timer.dart';
 import 'package:thimar/widgets/resend_code_button.dart';
 import 'package:thimar/widgets/welcome_message.dart';
 
-class VerifyOTPView extends StatefulWidget {
-  const VerifyOTPView({super.key});
+class ActiveAccountView extends StatefulWidget {
+  const ActiveAccountView({super.key});
 
   @override
-  State<VerifyOTPView> createState() => _VerifyOTPViewState();
+  State<ActiveAccountView> createState() => _ActiveAccountView();
 }
 
-class _VerifyOTPViewState extends State<VerifyOTPView> {
+class _ActiveAccountView extends State<ActiveAccountView> {
   bool isTimerActive = true;
   @override
   Widget build(BuildContext context) {
@@ -29,7 +26,7 @@ class _VerifyOTPViewState extends State<VerifyOTPView> {
             Image.asset('assets/images/logo.png', width: 140, height: 140),
             const SizedBox(height: 16),
             WelcomeMessage(
-              title: 'نسيت كلمة المرور\n',
+              title: 'تفعيل الحساب\n',
               subtitle: 'أدخل الكود المكون من 4 أرقام المرسل علي رقم الجوال',
             ),
             const SizedBox(height: 8),
@@ -39,7 +36,7 @@ class _VerifyOTPViewState extends State<VerifyOTPView> {
                 TextButton(
                   onPressed: () {
                     // Handle change phone number action
-                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (builder) => ForgetPasswordView()));
                   },
                   child: Text(
                     'تغيير رقم الجوال',
@@ -69,7 +66,6 @@ class _VerifyOTPViewState extends State<VerifyOTPView> {
               text: 'تأكيد الكود',
               onPressed: () {
                 // Handle OTP verification
-                Navigator.push(context, MaterialPageRoute(builder: (builder) => ActiveAccountView()));
               },
             ),
             const SizedBox(height: 24),

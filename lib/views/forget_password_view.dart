@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thimar/views/create_new_password.dart';
 import 'package:thimar/views/login_view.dart';
+import 'package:thimar/views/verify_otp_view.dart';
 import 'package:thimar/widgets/login_or_signup_hint.dart';
 import 'package:thimar/widgets/mobile_number.dart';
 import 'package:thimar/widgets/my_button.dart';
@@ -30,7 +31,7 @@ class ForgetPasswordView extends StatelessWidget {
               // Navigate to CreateNewPasswordView
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (builder) => CreateNewPasswordView()),
+                MaterialPageRoute(builder: (builder) => VerifyOTPView()),
               );
             }),
             LoginOrSignUpHint(

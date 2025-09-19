@@ -1,12 +1,22 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:thimar/widgets/my_bincode.dart';
 import 'package:thimar/widgets/my_button.dart';
+import 'package:thimar/widgets/my_circular_timer.dart';
+import 'package:thimar/widgets/resend_code_button.dart';
 import 'package:thimar/widgets/welcome_message.dart';
 
-class VerifyOTPView extends StatelessWidget {
+class VerifyOTPView extends StatefulWidget {
   const VerifyOTPView({super.key});
 
+  @override
+  State<VerifyOTPView> createState() => _VerifyOTPViewState();
+}
+
+class _VerifyOTPViewState extends State<VerifyOTPView> {
+  bool isTimerActive = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,40 +62,7 @@ class VerifyOTPView extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             // Add your OTP input fields here
-            PinCodeTextField(
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              textStyle: TextStyle(
-                fontSize: 24,
-                color: Color(0xFFFFFFFF),
-                fontFamily: 'Tajawal',
-                fontWeight: FontWeight.w500,
-              ),
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              appContext: context,
-              length: 4,
-              keyboardType: TextInputType.number,
-              enableActiveFill: true,
-              pinTheme: PinTheme(
-                shape: PinCodeFieldShape.box,
-                borderRadius: BorderRadius.circular(16),
-                fieldHeight: 60,
-                fieldWidth: 70,
-                activeFillColor: Theme.of(context).colorScheme.primary,
-                selectedFillColor: Theme.of(context).colorScheme.primary,
-                inactiveFillColor: Color(0xFFFFFFFF),
-                selectedColor: Theme.of(context).colorScheme.primary,
-                activeColor: Color(0xffF3F3F3),
-                inactiveColor: Color(0xffF3F3F3),
-                borderWidth: 1,
-              ),
-              onChanged: (value) {
-                print("Current code: $value");
-              },
-              onCompleted: (value) {
-                print("Code entered: $value");
-                // هنا تقدر تعمل Verify للـ OTP
-              },
-            ),
+            MyBinCodeTextField(),
             const SizedBox(height: 24),
             MyButton(
               text: 'تأكيد الكود',
@@ -106,38 +83,32 @@ class VerifyOTPView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             // Circular countdown timer
+            if (isTimerActive)
+              MyCircularDowenTimer(
+                onComplete: () {
+                  setState(() {
+                    isTimerActive = false;
+                  });
+                },
+              ),
             const SizedBox(height: 20),
-            SizedBox(
-              height: 48,
-              width: 133,
-              child: OutlinedButton(
+            if (!isTimerActive)
+              ResenCodeButton(
                 onPressed: () {
                   // Handle resend OTP action
+                  setState(() {
+                    isTimerActive = true;
+                  });
                 },
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: 1,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 22, vertical: 8),
-                ),
-                child: Text(
-                  'إعادة الإرسال',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontFamily: 'Tajawal',
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
               ),
-            ),
           ],
         ),
       ),
     );
   }
 }
+
+
+
+
+

@@ -14,7 +14,7 @@ class RegisterView extends StatelessWidget {
       backgroundColor: Color(0xFFFFFFFF),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
+        child: Column(
           children: [
             Image.asset('assets/images/logo.png', width: 140, height: 140),
             const SizedBox(height: 16),

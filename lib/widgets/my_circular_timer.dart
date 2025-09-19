@@ -21,7 +21,7 @@ class MyCircularDowenTimer extends StatelessWidget {
       isReverse: true,
       width: 67,
       height: 70,
-      duration: 5,
+      duration: 90,
       fillColor: Theme.of(context).colorScheme.primary,
       ringColor: Color(0xffF3F3F3),
       onComplete: onComplete,

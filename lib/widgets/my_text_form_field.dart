@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 
 class MyTextFormField extends StatelessWidget {
   const MyTextFormField({
-    super.key, required this.hintText,
+    super.key, required this.hintText, this.keyboardType, this.obSecureText,
   });
   final String hintText ;
+  final TextInputType? keyboardType;
+  final bool? obSecureText ;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      keyboardType: TextInputType.phone,
+      obscureText: obSecureText ?? false,
+      keyboardType: keyboardType ?? TextInputType.text,
       textAlign: TextAlign.right,
       decoration: InputDecoration(
         fillColor: Color(0xFFFFFFFF),

@@ -1,8 +1,8 @@
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:thimar/views/active_account_view.dart';
+import 'package:thimar/views/create_new_password.dart';
+import 'package:thimar/views/login_view.dart';
+import 'package:thimar/widgets/login_or_signup_hint.dart';
 import 'package:thimar/widgets/my_bincode.dart';
 import 'package:thimar/widgets/my_button.dart';
 import 'package:thimar/widgets/my_circular_timer.dart';
@@ -24,7 +24,7 @@ class _VerifyOTPViewState extends State<VerifyOTPView> {
       backgroundColor: Color(0xFFFFFFFF),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: ListView(
           children: [
             Image.asset('assets/images/logo.png', width: 140, height: 140),
             const SizedBox(height: 16),
@@ -69,7 +69,7 @@ class _VerifyOTPViewState extends State<VerifyOTPView> {
               text: 'تأكيد الكود',
               onPressed: () {
                 // Handle OTP verification
-                Navigator.push(context, MaterialPageRoute(builder: (builder) => ActiveAccountView()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => CreateNewPasswordView()));
               },
             ),
             const SizedBox(height: 24),
@@ -103,6 +103,17 @@ class _VerifyOTPViewState extends State<VerifyOTPView> {
                   });
                 },
               ),
+              LoginOrSignUpHint(
+              hint: 'لديك حساب بالفعل؟',
+              actionText: 'تسجيل الدخول',
+              onPressed: () {
+                // Navigate to LoginView
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (builder) => LoginView()),
+                );
+              },
+            ),
           ],
         ),
       ),

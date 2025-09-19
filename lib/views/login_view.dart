@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thimar/views/forget_password_view.dart';
 import 'package:thimar/views/register_view.dart';
-import 'package:thimar/widgets/country_code.dart';
 import 'package:thimar/widgets/login_or_signup_hint.dart';
 import 'package:thimar/widgets/mobile_number.dart';
 import 'package:thimar/widgets/my_button.dart';
@@ -10,6 +9,7 @@ import 'package:thimar/widgets/welcome_message.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
+  static const routeName = 'LoginView';
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,7 @@ class LoginView extends StatelessWidget {
       backgroundColor: Color(0xFFFFFFFF),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: ListView(
           children: [
             Image.asset('assets/images/logo.png', width: 140, height: 140),
 
@@ -31,7 +30,7 @@ class LoginView extends StatelessWidget {
             // Mobile Number TextField and country
             MobileNumber(),
             const SizedBox(height: 16),
-            MyTextFormField(hintText: 'كلمة المرور'),
+            MyTextFormField(hintText: 'كلمة المرور',obSecureText: true,),
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.centerLeft,

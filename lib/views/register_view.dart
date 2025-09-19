@@ -14,8 +14,7 @@ class RegisterView extends StatelessWidget {
       backgroundColor: Color(0xFFFFFFFF),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: ListView(
           children: [
             Image.asset('assets/images/logo.png', width: 140, height: 140),
             const SizedBox(height: 16),
@@ -33,9 +32,9 @@ class RegisterView extends StatelessWidget {
             const SizedBox(height: 16),
             MyTextFormField(hintText: 'المدينة'),
             const SizedBox(height: 16),
-            MyTextFormField(hintText: 'كلمة المرور'),
+            MyTextFormField(hintText: 'كلمة المرور', obSecureText: true),
             const SizedBox(height: 16),
-            MyTextFormField(hintText: 'تأكيد كلمة المرور'),
+            MyTextFormField(hintText: 'تأكيد كلمة المرور', obSecureText: true),
             const SizedBox(height: 28),
             MyButton(text: 'تسجيل'),
             LoginOrSignUpHint(

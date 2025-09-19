@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thimar/views/forget_password_view.dart';
+import 'package:thimar/views/login_view.dart';
+import 'package:thimar/widgets/login_or_signup_hint.dart';
 import 'package:thimar/widgets/my_bincode.dart';
 import 'package:thimar/widgets/my_button.dart';
 import 'package:thimar/widgets/my_circular_timer.dart';
@@ -21,7 +23,7 @@ class _ActiveAccountView extends State<ActiveAccountView> {
       backgroundColor: Color(0xFFFFFFFF),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: ListView(
           children: [
             Image.asset('assets/images/logo.png', width: 140, height: 140),
             const SizedBox(height: 16),
@@ -99,6 +101,17 @@ class _ActiveAccountView extends State<ActiveAccountView> {
                   });
                 },
               ),
+              LoginOrSignUpHint(
+              hint: 'لديك حساب بالفعل؟',
+              actionText: 'تسجيل الدخول',
+              onPressed: () {
+                // Navigate to LoginView
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (builder) => LoginView()),
+                );
+              },
+            ),
           ],
         ),
       ),

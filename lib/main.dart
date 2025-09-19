@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        LoginView.routeName: (context) => LoginView(),
+      },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xff4C8613),
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginView(),
+      home: SplashView(),
     );
   }
 }

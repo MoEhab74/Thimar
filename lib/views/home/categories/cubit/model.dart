@@ -1,3 +1,5 @@
+part of 'cubit.dart';
+
 class CategoryModel {
   late final List<CategoryDate> data;
   late final Links links;

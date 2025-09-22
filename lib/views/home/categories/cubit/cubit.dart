@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:thimar/views/home/categories/cubit/state.dart';
-
+part 'model.dart';
+part 'state.dart';
 class CategoriesCubit extends Cubit<CategoriesState>{
    CategoriesCubit() : super(const CategoriesInitial());
 

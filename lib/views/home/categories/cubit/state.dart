@@ -1,5 +1,4 @@
-import 'package:thimar/views/home/categories/cubit/model.dart';
-
+part of 'cubit.dart';
 class CategoriesState {
   const CategoriesState();
 }

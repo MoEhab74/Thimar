@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:thimar/widgets/login_or_signup_hint.dart';
-import 'package:thimar/widgets/mobile_number.dart';
-import 'package:thimar/widgets/my_button.dart';
-import 'package:thimar/widgets/my_text_form_field.dart';
-import 'package:thimar/widgets/welcome_message.dart';
+import 'package:thimar/core/ui/login_or_signup_hint.dart';
+import 'package:thimar/core/ui/mobile_number.dart';
+import 'package:thimar/core/ui/my_button.dart';
+import 'package:thimar/core/ui/my_text_form_field.dart';
+import 'package:thimar/core/ui/welcome_message.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});

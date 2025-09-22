@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:thimar/views/active_account_view.dart';
-import 'package:thimar/views/create_new_password.dart';
-import 'package:thimar/views/login_view.dart';
-import 'package:thimar/widgets/login_or_signup_hint.dart';
-import 'package:thimar/widgets/my_bincode.dart';
-import 'package:thimar/widgets/my_button.dart';
-import 'package:thimar/widgets/my_circular_timer.dart';
-import 'package:thimar/widgets/resend_code_button.dart';
-import 'package:thimar/widgets/welcome_message.dart';
+import 'package:thimar/core/ui/login_or_signup_hint.dart';
+import 'package:thimar/views/create_new_password/create_new_password.dart';
+import 'package:thimar/views/login/view.dart';
+import 'package:thimar/core/ui/my_bincode.dart';
+import 'package:thimar/core/ui/my_button.dart';
+import 'package:thimar/core/ui/my_circular_timer.dart';
+import 'package:thimar/core/ui/resend_code_button.dart';
+import 'package:thimar/core/ui/welcome_message.dart';
 
 class VerifyOTPView extends StatefulWidget {
   const VerifyOTPView({super.key});

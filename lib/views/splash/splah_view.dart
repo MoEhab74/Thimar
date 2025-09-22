@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:thimar/views/login_view.dart';
+import 'package:thimar/views/login/view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});

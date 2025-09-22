@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:thimar/views/login_view.dart';
-import 'package:thimar/views/verify_otp_view.dart';
-import 'package:thimar/widgets/login_or_signup_hint.dart';
-import 'package:thimar/widgets/mobile_number.dart';
-import 'package:thimar/widgets/my_button.dart';
-import 'package:thimar/widgets/welcome_message.dart';
+import 'package:thimar/core/ui/login_or_signup_hint.dart';
+import 'package:thimar/views/login/view.dart';
+import 'package:thimar/views/verify_otp/verify_otp_view.dart';
+import 'package:thimar/core/ui/mobile_number.dart';
+import 'package:thimar/core/ui/my_button.dart';
+import 'package:thimar/core/ui/welcome_message.dart';
 
 class ForgetPasswordView extends StatelessWidget {
   const ForgetPasswordView({super.key});

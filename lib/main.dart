@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:thimar/views/login_view.dart';
-import 'package:thimar/views/splah_view.dart';
+import 'package:thimar/views/login/view.dart';
+import 'package:thimar/views/splash/splah_view.dart';
 
 void main() {
   runApp(

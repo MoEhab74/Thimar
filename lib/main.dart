@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:thimar/views/home/categories/cubit/cubit.dart';
 import 'package:thimar/views/login/view.dart';
 import 'package:thimar/views/splash/splah_view.dart';
 
@@ -14,24 +16,31 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        LoginView.routeName: (context) => LoginView(),
-      },
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xff4C8613),
-           primary: const Color(0xff4C8613)),
-           brightness: Brightness.light,
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(fontFamily: 'Tajawal'),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CategoriesCubit()..getCategories(),
         ),
-        primaryTextTheme: const TextTheme(
-          bodyMedium: TextStyle(fontFamily: 'Tajawal'),
+      ],
+      child: MaterialApp(
+        routes: {
+          LoginView.routeName: (context) => LoginView(),
+        },
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xff4C8613),
+             primary: const Color(0xff4C8613)),
+             brightness: Brightness.light,
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(fontFamily: 'Tajawal'),
+          ),
+          primaryTextTheme: const TextTheme(
+            bodyMedium: TextStyle(fontFamily: 'Tajawal'),
+          ),
         ),
+        debugShowCheckedModeBanner: false,
+        home: SplashView(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: SplashView(),
     );
   }
 }

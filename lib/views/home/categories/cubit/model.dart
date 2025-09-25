@@ -31,10 +31,10 @@ class CategoryModel {
   // }
 
   // Using the factory constructor instead of the traditional way (default constructor)
-  factory CategoryModel.fromMap(Map<String, dynamic> map) {
+  factory CategoryModel.fromJson(Map<String, dynamic> map) {
     return CategoryModel(
       data: (map['data'] as List)
-          .map((e) => CategoryDate(e))
+          .map((e) => CategoryDate.fromJson(e))
           .toList(), // Convert list of maps to list of objects
       links: Links.fromJson(
         map['links'] ?? {},
@@ -143,10 +143,30 @@ class CategoryDate {
   late int id;
   late String? name, description;
   late String media;
-  CategoryDate(Map<String, dynamic> map) {
-    id = map['id'] ?? 0;
-    name = map['name'] ?? '';
-    description = map['description'] ?? '';
-    media = map['media'];
+
+  CategoryDate({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.media,
+  });
+  // Traditional by the default constructor
+  
+  // CategoryDate() {
+  //   id = map['id'] ?? 0;
+  //   name = map['name'] ?? '';
+  //   description = map['description'] ?? '';
+  //   media = map['media'];
+  // }
+
+  // Using the factory constructor instead of the traditional way (default constructor)
+  
+  factory CategoryDate.fromJson(Map<String, dynamic> map) {
+    return CategoryDate(
+      id: map['id'] ?? 0,
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      media: map['media'] ?? '',
+    );
   }
 }

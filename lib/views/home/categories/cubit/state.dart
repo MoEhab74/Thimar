@@ -12,7 +12,7 @@ class CategoriesLoading extends CategoriesState {
 }
 
 class CategoriesLoaded extends CategoriesState {
-  final List<CategoryModel> list;  // Just a list of categories that i interested in building the ui by it
+  final List<CategoryDate> list;  // Just a list of categories that i interested in building the ui by it
 
   const CategoriesLoaded(this.list);
 }

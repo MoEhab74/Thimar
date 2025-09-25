@@ -15,36 +15,38 @@ class ForgetPasswordView extends StatelessWidget {
       backgroundColor: Color(0xFFFFFFFF),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Image.asset('assets/images/logo.png', width: 140, height: 140),
-            const SizedBox(height: 16),
-            WelcomeMessage(
-              title: 'نسيت كلمة المرور\n',
-              subtitle: 'أدخل رقم الجوال المرتبط بحسابك',
-            ),
-            const SizedBox(height: 30),
-            MobileNumber(),
-            const SizedBox(height: 16),
-            MyButton(text: 'تأكيد رقم الجوال', onPressed: () {
-              // Navigate to CreateNewPasswordView
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (builder) => VerifyOTPView()),
-              );
-            }),
-            LoginOrSignUpHint(
-              hint: 'لديك حساب بالفعل؟',
-              actionText: 'تسجيل الدخول',
-              onPressed: () {
-                // Navigate to LoginView
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset('assets/images/logo.png', width: 140, height: 140),
+              const SizedBox(height: 16),
+              WelcomeMessage(
+                title: 'نسيت كلمة المرور\n',
+                subtitle: 'أدخل رقم الجوال المرتبط بحسابك',
+              ),
+              const SizedBox(height: 30),
+              MobileNumber(),
+              const SizedBox(height: 16),
+              MyButton(text: 'تأكيد رقم الجوال', onPressed: () {
+                // Navigate to CreateNewPasswordView
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (builder) => LoginView()),
+                  MaterialPageRoute(builder: (builder) => VerifyOTPView()),
                 );
-              },
-            ),
-          ],
+              }),
+              LoginOrSignUpHint(
+                hint: 'لديك حساب بالفعل؟',
+                actionText: 'تسجيل الدخول',
+                onPressed: () {
+                  // Navigate to LoginView
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (builder) => LoginView()),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

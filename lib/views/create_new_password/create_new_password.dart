@@ -15,38 +15,40 @@ class CreateNewPasswordView extends StatelessWidget {
       backgroundColor: Color(0xFFFFFFFF),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Image.asset('assets/images/logo.png', width: 140, height: 140),
-            const SizedBox(height: 16),
-            WelcomeMessage(
-              title: 'نسيت كلمة المرور\n',
-              subtitle: 'أدخل كلمة المرور الجديدة',
-            ),
-            const SizedBox(height: 30),
-            MyTextFormField(hintText: 'كلمة المرور', obSecureText: true),
-            const SizedBox(height: 16),
-            MyTextFormField(hintText: 'تأكيد كلمة المرور', obSecureText: true),
-            const SizedBox(height: 24),
-            MyButton(
-              text: 'تغيير كلمة المرور',
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (builder) => ActiveAccountView()),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset('assets/images/logo.png', width: 140, height: 140),
+              const SizedBox(height: 16),
+              WelcomeMessage(
+                title: 'نسيت كلمة المرور\n',
+                subtitle: 'أدخل كلمة المرور الجديدة',
               ),
-            ),
-            LoginOrSignUpHint(
-              hint: 'لديك حساب بالفعل؟',
-              actionText: 'تسجيل الدخول',
-              onPressed: () {
-                // Navigate to LoginView
-                Navigator.push(
+              const SizedBox(height: 30),
+              MyTextFormField(hintText: 'كلمة المرور', obSecureText: true),
+              const SizedBox(height: 16),
+              MyTextFormField(hintText: 'تأكيد كلمة المرور', obSecureText: true),
+              const SizedBox(height: 24),
+              MyButton(
+                text: 'تغيير كلمة المرور',
+                onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (builder) => LoginView()),
-                );
-              },
-            ),
-          ],
+                  MaterialPageRoute(builder: (builder) => ActiveAccountView()),
+                ),
+              ),
+              LoginOrSignUpHint(
+                hint: 'لديك حساب بالفعل؟',
+                actionText: 'تسجيل الدخول',
+                onPressed: () {
+                  // Navigate to LoginView
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (builder) => LoginView()),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

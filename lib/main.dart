@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
+            surface: const Color(0xFFFFFFFF),
             seedColor: const Color(0xff4C8613),
              primary: const Color(0xff4C8613)),
              brightness: Brightness.light,

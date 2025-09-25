@@ -18,7 +18,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
         'https://thimar.amr.aait-d.com/api/categories',
       );
       // get response and pass it to the state
-      categories = (response.data as List)
+      categories = (response.data['data'] as List)
           .map((e) => CategoryDate.fromJson(e))
           .toList();
       emit(CategoriesLoaded(categories));

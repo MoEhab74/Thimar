@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:thimar/views/home/categories/cubit/cubit.dart';
+import 'package:thimar/views/home/widgets/category_item.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -6,6 +9,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(title: const Text('Home View')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -22,41 +26,27 @@ class HomeView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            SizedBox(
-              height: 135,
-              child: ListView.builder(
-                reverse: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 10, // Example item count
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(18.0),
-                        width: 100,
-                        margin: const EdgeInsets.only(left: 8.0),
-                        color: Colors.green[100 * ((index % 8) + 1)],
-                        child: Center(
-                          child: Image.network(
-                            'https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg',
-                            height: 40,
-                            width: 40,
-                            // fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        'Category ${index + 1}',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
+            BlocBuilder<CategoriesCubit, CategoriesState>(
+              builder: (context, state) {
+                if (state is CategoriesLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is CategoriesError) {
+                  return Center(child: Text(state.message));
+                } else if (state is CategoriesLoaded) {
+                  return SizedBox(
+                    height: 135,
+                    child: ListView.builder(
+                      reverse: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.list.length,
+                      itemBuilder: (context, index) {
+                        return CategoryItem(category: state.list[index]);
+                      },
+                    ),
                   );
-                },
-              ),
+                }
+                return const SizedBox();
+              },
             ),
           ],
         ),

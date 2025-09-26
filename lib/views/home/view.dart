@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thimar/views/home/categories/cubit/cubit.dart';
@@ -18,7 +19,20 @@ class HomeView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // Add your widgets here
+              // Sliders
+              CarouselSlider(
+                options: CarouselOptions(
+                  height: 180.0,
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  viewportFraction: 0.9,
+                  aspectRatio: 16 / 9,
+                  initialPage: 0,
+                )
+                items: [],,
+                
+              )
+              // slider indicators
               Align(
                 alignment: Alignment.centerRight,
                 child: const Text(

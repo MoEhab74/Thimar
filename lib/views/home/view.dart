@@ -5,15 +5,27 @@ import 'package:thimar/core/ui/app_bar_actions.dart';
 import 'package:thimar/core/ui/app_bar_leading.dart';
 import 'package:thimar/core/ui/app_bar_title.dart';
 import 'package:thimar/views/home/categories/cubit/cubit.dart';
+import 'package:thimar/views/home/products/cubit.dart';
+import 'package:thimar/views/home/products/state.dart';
 import 'package:thimar/views/home/slider/cubit.dart';
 import 'package:thimar/views/home/slider/state.dart';
 import 'package:thimar/views/home/widgets/category_item.dart';
 import 'package:thimar/views/home/widgets/item_price.dart';
 import 'package:thimar/views/home/widgets/slider_item.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    BlocProvider.of<ProductsCubit>(context).fetchProducts();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<SliderCubit>(context).getSliders();
@@ -23,9 +35,7 @@ class HomeView extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: AppBarTitle(),
-        actions: [
-          AppBarActions(),
-        ],
+        actions: [AppBarActions()],
         leading: AppBarLeading(),
       ),
       body: SingleChildScrollView(
@@ -177,18 +187,38 @@ class HomeView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            GridView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 8,
-                childAspectRatio: 0.8,
-              ),
-              itemBuilder: (context, index) => ItemPrice(),
-              itemCount: 4,
+            BlocBuilder<ProductsCubit, ProductsState>(
+              builder: (context, state) {
+                if (state is ProductsLoadingState) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is ProductsErrorState) {
+                  return Center(child: Text(state.errorMessage));
+                } else if (state is ProductsLoadedState) {
+                  return GridView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 0.8,
+                    ),
+                    itemBuilder: (context, index) => ItemPrice(
+                      title: state.products[index].title,
+                      image: state.products[index].images.isNotEmpty 
+                          ? state.products[index].images[0].url 
+                          : state.products[index].mainImage,
+                      price: state.products[index].price,
+                      priceBeforeDiscount:
+                          state.products[index].priceBeforeDiscount,
+                      discount: state.products[index].discount,
+                    ),
+                    itemCount: state.products.length,
+                  );
+                }
+                return const Center(child: Text('No Products Found'));
+              },
             ),
           ],
         ),

@@ -1,11 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:thimar/core/ui/app_bar_actions.dart';
+import 'package:thimar/core/ui/app_bar_leading.dart';
+import 'package:thimar/core/ui/app_bar_title.dart';
 import 'package:thimar/views/home/categories/cubit/cubit.dart';
 import 'package:thimar/views/home/slider/cubit.dart';
 import 'package:thimar/views/home/slider/state.dart';
 import 'package:thimar/views/home/widgets/category_item.dart';
 import 'package:thimar/views/home/widgets/item_price.dart';
+import 'package:thimar/views/home/widgets/slider_item.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -18,70 +22,11 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text.rich(
-          textAlign: TextAlign.center,
-          TextSpan(
-            children: [
-              TextSpan(
-                text: 'التوصيل إلى',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w900,
-                  fontFamily: 'Tajawal',
-                ),
-              ),
-              TextSpan(
-                text: '\nشارع الملك فهد - جدة',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Tajawal',
-                ),
-              ),
-            ],
-          ),
-        ),
+        title: AppBarTitle(),
         actions: [
-          Row(
-            children: [
-              Text(
-                'سلة ثمار',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w900,
-                  fontFamily: 'Tajawal',
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 2.0, right: 8.0),
-                child: SizedBox(
-                  height: 32,
-                  width: 32,
-                  child: Image.asset('assets/images/logo.png'),
-                ),
-              ),
-            ],
-          ),
+          AppBarActions(),
         ],
-        leading: Container(
-          margin: const EdgeInsets.only(left: 16, right: 0, top: 8, bottom: 8),
-          decoration: BoxDecoration(
-            color: const Color(0xff4C8613).withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.notifications_active_outlined,
-              color: Color(0xff4C8613),
-            ),
-            onPressed: () {
-            },
-          ),
-        ),
+        leading: AppBarLeading(),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -248,21 +193,6 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class SliderItem extends StatelessWidget {
-  const SliderItem({super.key, required this.image});
-
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      width: double.infinity,
-      child: Image.network(image, fit: BoxFit.cover),
     );
   }
 }

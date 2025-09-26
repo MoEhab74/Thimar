@@ -15,7 +15,74 @@ class HomeView extends StatelessWidget {
     BlocProvider.of<SliderCubit>(context).getSliders();
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
-      appBar: AppBar(title: const Text('Home View')),
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        title: Text.rich(
+          textAlign: TextAlign.center,
+          TextSpan(
+            children: [
+              TextSpan(
+                text: 'التوصيل إلى',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900,
+                  fontFamily: 'Tajawal',
+                ),
+              ),
+              TextSpan(
+                text: '\nشارع الملك فهد - جدة',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Tajawal',
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          Row(
+            children: [
+              Text(
+                'سلة ثمار',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900,
+                  fontFamily: 'Tajawal',
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 2.0, right: 8.0),
+                child: SizedBox(
+                  height: 32,
+                  width: 32,
+                  child: Image.asset('assets/images/logo.png'),
+                ),
+              ),
+            ],
+          ),
+        ],
+        leading: Container(
+          margin: const EdgeInsets.only(left: 16, right: 0, top: 8, bottom: 8),
+          decoration: BoxDecoration(
+            color: const Color(0xff4C8613).withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: IconButton(
+            icon: const Icon(
+              Icons.notifications_active_outlined,
+              color: Color(0xff4C8613),
+            ),
+            onPressed: () {
+            },
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -30,11 +97,11 @@ class HomeView extends StatelessWidget {
                 decoration: InputDecoration(
                   hintTextDirection: TextDirection.rtl,
                   hintText: 'ابحث عن ماتريد؟',
-                  hintStyle: const TextStyle(
-                    fontFamily: 'Tajawal',
-
+                  hintStyle: const TextStyle(fontFamily: 'Tajawal'),
+                  suffixIcon: const Icon(
+                    Icons.search,
+                    color: Color(0xffB9C9A8),
                   ),
-                  suffixIcon: const Icon(Icons.search,color: Color(0xffB9C9A8),),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,

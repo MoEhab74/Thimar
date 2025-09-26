@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thimar/views/home/slider/model.dart';
 import 'package:thimar/views/home/slider/state.dart';
 
-class Sliders extends Cubit<SliderState>{
-  Sliders():super(SliderInitial());
+class SliderCubit extends Cubit<SliderState> {
+  SliderCubit() : super(SliderInitial());
 
   late List<SliderData> sliders;
+
+  int selectedSlider = 0;
 
   // get sliders data from api
 
@@ -25,5 +27,11 @@ class Sliders extends Cubit<SliderState>{
     } catch (e) {
       emit(SliderError(e.toString()));
     }
+  }
+
+  // Update indicator method
+  void updateIndicator(int index) {
+    selectedSlider = index;
+    emit(SliderUpdateIndicatorState());
   }
 }

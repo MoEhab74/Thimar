@@ -17,3 +17,5 @@ class SliderError extends SliderState{
 
   SliderError(this.message);
 }
+
+class SliderUpdateIndicatorState extends SliderState{}

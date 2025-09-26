@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thimar/views/home/categories/cubit/cubit.dart';
+import 'package:thimar/views/home/slider/cubit.dart';
 import 'package:thimar/views/login/view.dart';
 import 'package:thimar/views/splash/splah_view.dart';
 
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => CategoriesCubit()..getCategories(),
+        ),
+        BlocProvider(
+          create: (context) => SliderCubit(),
         ),
       ],
       child: MaterialApp(

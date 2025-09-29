@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thimar/views/home/categories/cubit/cubit.dart';
 import 'package:thimar/views/home/products/cubit.dart';
 import 'package:thimar/views/home/slider/cubit.dart';
+import 'package:thimar/views/login/cubit.dart';
 import 'package:thimar/views/login/view.dart';
 import 'package:thimar/views/splash/splah_view.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CategoriesCubit()..getCategories()),
         BlocProvider(create: (context) => SliderCubit()),
         BlocProvider(create: (context) => ProductsCubit()),
+        BlocProvider(create: (context) => LoginCubit()),
       ],
       child: MaterialApp(
         routes: {LoginView.routeName: (context) => LoginView()},

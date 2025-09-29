@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:thimar/core/ui/login_or_signup_hint.dart';
 import 'package:thimar/views/forget_password/forget_password_view.dart';
-import 'package:thimar/views/home/view.dart';
+import 'package:thimar/views/login/cubit.dart';
+import 'package:thimar/views/login/state.dart';
 import 'package:thimar/views/register/register_view.dart';
 import 'package:thimar/core/ui/mobile_number.dart';
 import 'package:thimar/core/ui/my_button.dart';
@@ -60,21 +62,20 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  final _mobileController = TextEditingController();
-  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<LoginCubit>(context);
     return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MobileNumber(controller: _mobileController),
+          MobileNumber(controller: cubit.mobileController),
           const SizedBox(height: 16),
           MyTextFormField(
             hintText: 'كلمة المرور',
             obSecureText: true,
-            controller: _passwordController,
+            controller: cubit.passwordController,
           ),
           const SizedBox(height: 8),
           Align(
@@ -98,25 +99,15 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           const SizedBox(height: 28),
-          MyButton(
-            text: 'تسجيل الدخول',
-            onPressed: () {
-              // Validate the form
-              if (!_formKey.currentState!.validate()) {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (builder) => HomeView()),
-                  (route) => false,
-                );
-              } else {
-                // Show a snackbar
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('يرجى ملء جميع الحقول'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
+          BlocBuilder<LoginCubit, LoginState>(
+            builder: (context, state) {
+              return MyButton(
+                text: 'تسجيل الدخول',
+                onPressed: () {
+                  // Validate the form
+                  cubit.login();
+                },
+              );
             },
           ),
         ],

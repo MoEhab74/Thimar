@@ -3,7 +3,8 @@ import 'package:thimar/core/ui/country_code.dart';
 import 'package:thimar/core/ui/my_text_form_field.dart';
 
 class MobileNumber extends StatelessWidget {
-  const MobileNumber({super.key});
+  const MobileNumber({super.key, this.controller});
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class MobileNumber extends StatelessWidget {
           child: MyTextFormField(
             hintText: 'رقم الجوال',
             keyboardType: TextInputType.phone,
+            controller: controller,
           ),
         ),
         const SizedBox(width: 8),

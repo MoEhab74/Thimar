@@ -2,15 +2,27 @@ import 'package:flutter/material.dart';
 
 class MyTextFormField extends StatelessWidget {
   const MyTextFormField({
-    super.key, required this.hintText, this.keyboardType, this.obSecureText,
+    super.key,
+    required this.hintText,
+    this.keyboardType,
+    this.obSecureText,
+    this.controller,
   });
-  final String hintText ;
+  final String hintText;
   final TextInputType? keyboardType;
-  final bool? obSecureText ;
+  final bool? obSecureText;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'هذا الحقل مطلوب';
+        }
+        return null;
+      },
+      controller: controller,
       obscureText: obSecureText ?? false,
       keyboardType: keyboardType ?? TextInputType.text,
       textAlign: TextAlign.right,
@@ -26,16 +38,10 @@ class MyTextFormField extends StatelessWidget {
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            color: Color(0xffF3F3F3),
-            width: 2,
-          ),
+          borderSide: BorderSide(color: Color(0xffF3F3F3), width: 2),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xffF3F3F3),
-            width: 2,
-          ),
+          borderSide: BorderSide(color: Color(0xffF3F3F3), width: 2),
           borderRadius: BorderRadius.circular(16),
         ),
         focusedBorder: OutlineInputBorder(

@@ -30,43 +30,8 @@ class LoginView extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               // Mobile Number TextField and country
-              MobileNumber(),
-              const SizedBox(height: 16),
-              MyTextFormField(hintText: 'كلمة المرور', obSecureText: true),
-              const SizedBox(height: 8),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (builder) => ForgetPasswordView(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'نسيت كلمة المرور؟',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Color(0xff707070),
-                      fontFamily: 'Tajawal',
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 28),
-              MyButton(
-                text: 'تسجيل الدخول',
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (builder) => HomeView()),
-                    (route) => false,
-                  );
-                },
-              ),
+              LoginForm(),
+
               LoginOrSignUpHint(
                 hint: 'ليس لديك حساب؟',
                 actionText: 'انشاء حساب',
@@ -81,6 +46,80 @@ class LoginView extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
+  final _mobileController = TextEditingController();
+  final _passwordController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MobileNumber(controller: _mobileController),
+          const SizedBox(height: 16),
+          MyTextFormField(
+            hintText: 'كلمة المرور',
+            obSecureText: true,
+            controller: _passwordController,
+          ),
+          const SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (builder) => ForgetPasswordView()),
+                );
+              },
+              child: Text(
+                'نسيت كلمة المرور؟',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xff707070),
+                  fontFamily: 'Tajawal',
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 28),
+          MyButton(
+            text: 'تسجيل الدخول',
+            onPressed: () {
+              // Validate the form
+              if (!_formKey.currentState!.validate()) {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (builder) => HomeView()),
+                  (route) => false,
+                );
+              } else {
+                // Show a snackbar
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('يرجى ملء جميع الحقول'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }
